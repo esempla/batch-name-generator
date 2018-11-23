@@ -1,19 +1,27 @@
 package com.gihub.esempla;
 
 import com.gihub.esempla.model.Rules;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
+@AllArgsConstructor
+@Data
 public class Todo {
-    public static final String TEST = "test";
 
-    public static void main(String[] args) {
+    private final ModelMapper modelMapper;
 
 
-        Rules rules = Rules.builder().userId(3).userName("tele4entru")
-                .jobId(1).currentDate(LocalDate.now()).currentTime(LocalTime.now()).build();
+    public static void main(String[] args) throws Exception {
+
+        Rules rules = Rules.builder().userName("Grisha").currentTime("12:12").jobId("3").build();
+        String input = "$$UserName";
+        String output = rules.parse();
+        System.err.println(output);
+
 
     }
+
 }
 
