@@ -71,7 +71,7 @@ public class Rules {
 
 
     public String checkForException(String expression) throws Exception {
-        String patternString = " ";
+        String patternString = "[^\\w^&\"-]";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(expression);
 
@@ -87,8 +87,8 @@ public class Rules {
         return expression;
     }
 
-    public List<String> getAllRules() {
-        List<String> rules = Arrays.asList(USER_ID, USER_NAME, CURRENT_DATE, CURRENT_TIME, JOB_ID);
+    public List<String> getAllRules(){
+        List<String> rules = Arrays.asList(USER_ID,USER_NAME,CURRENT_DATE,CURRENT_TIME,JOB_ID);
         return rules;
     }
 }
