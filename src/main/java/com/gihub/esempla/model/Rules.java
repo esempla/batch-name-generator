@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +24,6 @@ public class Rules {
     private static final String CURRENT_DATE = "$CurrentDate";
     private static final String CURRENT_TIME = "$CurrentTime";
     private static final String JOB_ID = "$JobID";
-
 
     private String userId;
     private String userName;
@@ -70,7 +71,7 @@ public class Rules {
 
 
     public String checkForException(String expression) throws Exception {
-        String patternString = "[^\\w^&\"-]";
+        String patternString = " ";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(expression);
 
@@ -84,5 +85,10 @@ public class Rules {
 
         }
         return expression;
+    }
+
+    public List<String> getAllRules() {
+        List<String> rules = Arrays.asList(USER_ID, USER_NAME, CURRENT_DATE, CURRENT_TIME, JOB_ID);
+        return rules;
     }
 }
