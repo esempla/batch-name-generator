@@ -15,9 +15,9 @@ public class Todo {
 
     public static void main(String[] args) throws Exception {
 
-        Rules rules = Rules.builder().userName("Grisha").currentTime("12:12").jobId("3").build();
+        Rules rules = Rules.builder().userName("test").currentTime("12:12").jobId("3").build();
         String input = "$$UserName";
-        String output = rules.parse();
+        String output = rules.parse(input);
         System.err.println(output);
 
 
