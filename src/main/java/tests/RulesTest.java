@@ -23,7 +23,7 @@ public class RulesTest {
                 .jobId("3").build();
 
         String input = "$UserName-$CurrentDate";
-        String output = rules.parse(input);
+        String output = rules.parseInput(input);
         assertEquals(output, "Test-10/10/2018");
     }
 
@@ -35,7 +35,7 @@ public class RulesTest {
                 .jobId("3").build();
 
         String input = "$UserName-$CurrentDate";
-        String output = rules.parse(input);
+        String output = rules.parseInput(input);
         String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         assertEquals(output, "Test-" + localDate);
     }
@@ -48,7 +48,7 @@ public class RulesTest {
                 .jobId("3").build();
 
         String input = "$PropertyName";
-        String output = rules.parse(input);
+        String output = rules.parseInput(input);
         Executable closureContainingCodeToTest = () -> new NoSuchProperty("Property not Found.");
         assertThrows(NoSuchProperty.class, closureContainingCodeToTest, "Property not Found.");
 
@@ -71,7 +71,7 @@ public class RulesTest {
                 .jobId("3").build();
 
         String input = "Test - $JobID";
-        String output = rules.parse(input);
+        String output = rules.parseInput(input);
         assertEquals(output, "Test -" + " 3");
 
     }

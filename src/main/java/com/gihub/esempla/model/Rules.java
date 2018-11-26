@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Rules {
+
 
     private static final String USER_ID = "$UserID";
     private static final String USER_NAME = "$UserName";
@@ -31,14 +31,23 @@ public class Rules {
     private String currentTime;
     private String jobId;
 
-    public String parse() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "&"
-                + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+    public static boolean stringContainsRole(String expression, List<String> rules) {
+        final boolean b = rules.stream().anyMatch(expression::contains);
+        if (b == false) {
+            throw new NoSuchProperty("Property not Found.");
+        } else
+            return b;
     }
 
-    public String parse(String expression) throws Exception {
+    public static List<String> getAllRules() {
+        List<String> enumNames = Stream.of(EnumRoles.values())
+                .map(EnumRoles::getName)
+                .collect(Collectors.toList());
+        return enumNames;
+    }
 
-        checkForException(expression);
+    public String parseInput(String expression) throws Exception {
+        stringContainsRole(expression, getAllRules());
 
         if (expression.contains(USER_NAME)) {
             expression = expression.replace(USER_NAME, userName);
@@ -66,29 +75,13 @@ public class Rules {
             expression = expression.replace(JOB_ID, jobId);
         }
 
+
         return expression;
     }
 
 
-    public String checkForException(String expression) throws Exception {
-        String patternString = "[^\\w^&\"-]";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(expression);
-
-        if (matcher.lookingAt()) {
-            if (expression.contains(CURRENT_TIME) || expression.contains(CURRENT_DATE) || expression.contains(USER_ID)
-                    || expression.contains(USER_NAME) || expression.contains(JOB_ID)) {
-                return expression;
-            } else {
-                throw new NoSuchProperty("Property not Found.");
-            }
-
-        }
-        return expression;
-    }
-
-    public List<String> getAllRules(){
-        List<String> rules = Arrays.asList(USER_ID,USER_NAME,CURRENT_DATE,CURRENT_TIME,JOB_ID);
-        return rules;
+    public String parse() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "&"
+                + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }
