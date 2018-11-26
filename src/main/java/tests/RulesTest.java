@@ -57,7 +57,7 @@ public class RulesTest {
     @Test
     public void testEmptyExpression() throws Exception {
         Rules rules = new Rules();
-        String output = rules.parse();
+        String output = rules.parseInput();
         String localTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
         String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         assertEquals(output, localDate + "&" + localTime);

@@ -80,7 +80,7 @@ public class Rules {
     }
 
 
-    public String parse() {
+    public String parseInput() {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "&"
                 + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
