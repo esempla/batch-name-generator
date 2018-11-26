@@ -36,7 +36,7 @@ public class Rules {
         if (b == false) {
             throw new NoSuchProperty("Property not Found.");
         } else
-            return b;
+            return true;
     }
 
     public static List<String> getAllRules() {
