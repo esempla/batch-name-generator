@@ -1,10 +1,10 @@
 This library was created for generating names based on specific rules such as :
 
-- $UserID
-- $UserName
-- $CurrentDate
-- $CurrentTime
-- $JobID
+- **$UserID**
+- **$UserName**
+- **$CurrentDate**
+- **$CurrentTime**
+- **$JobID**
 
 There is a parse method *parseInput("your expression")* that takes your input string and returns the new one. 
 
