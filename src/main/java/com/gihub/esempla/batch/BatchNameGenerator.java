@@ -68,7 +68,7 @@ public class BatchNameGenerator {
 
 
     public String parseInput() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "&"
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "&"
                 + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }
