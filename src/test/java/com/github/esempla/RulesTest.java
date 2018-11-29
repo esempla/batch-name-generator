@@ -18,12 +18,12 @@ public class RulesTest {
     public void testValidUsernameAndDate() {
         BatchNameGenerator rules = BatchNameGenerator.builder()
                 .userName("Test").userId("1")
-                .currentTime("10:10").currentDate("10/10/2018")
+                .currentTime("10:10").currentDate("10-10-2018")
                 .jobId("3").build();
 
         String input = "$UserName-$CurrentDate";
         String output = rules.parseInput(input);
-        assertEquals(output, "Test-10/10/2018");
+        assertEquals(output, "Test-10-10-2018");
     }
 
     @Test
@@ -35,7 +35,7 @@ public class RulesTest {
 
         String input = "$UserName-$CurrentDate";
         String output = rules.parseInput(input);
-        String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         assertEquals(output, "Test-" + localDate);
     }
 
@@ -58,7 +58,7 @@ public class RulesTest {
         BatchNameGenerator rules = BatchNameGenerator.builder().build();
         String output = rules.parseInput();
         String localTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-        String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         assertEquals(output, localDate + "&" + localTime);
     }
 
