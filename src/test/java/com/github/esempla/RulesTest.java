@@ -18,7 +18,7 @@ public class RulesTest {
     public void testValidUsernameAndDate() {
         BatchNameGenerator rules = BatchNameGenerator.builder()
                 .userName("Test").userId("1")
-                .currentTime("10:10").currentDate("10-10-2018")
+                .currentTime("10-10").currentDate("10-10-2018")
                 .jobId("3").build();
 
         String input = "$UserName-$CurrentDate";
@@ -30,7 +30,7 @@ public class RulesTest {
     public void testValidUsernameAndEmptyDate() {
         BatchNameGenerator rules = BatchNameGenerator.builder()
                 .userName("Test").userId("1")
-                .currentTime("10:10")
+                .currentTime("10-10")
                 .jobId("3").build();
 
         String input = "$UserName-$CurrentDate";
@@ -57,7 +57,7 @@ public class RulesTest {
     public void testEmptyExpression() {
         BatchNameGenerator rules = BatchNameGenerator.builder().build();
         String output = rules.parseInput();
-        String localTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+        String localTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH-mm"));
         String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         assertEquals(output, localDate + "&" + localTime);
     }
@@ -66,7 +66,7 @@ public class RulesTest {
     public void testTextWithVariable() {
         BatchNameGenerator rules = BatchNameGenerator.builder()
                 .userName("Test").userId("1")
-                .currentTime("10:10")
+                .currentTime("10-10")
                 .jobId("3").build();
 
         String input = "Test - $JobID";
