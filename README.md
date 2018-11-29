@@ -21,9 +21,24 @@ There is an option to combine variable with a text:
 Hello - $CurrentDate, it will result the following output "Hello - $10/10/2018"
 
 #### Steps to start working with it:
-- On the command line
-- git clone https://github.com/esempla/batch-name-generator.git
-- Inside Intellij IDEA 
-- File -> New -> Project From Existing Sources...
-- Select the pom.xml. Click on the Ok button.
 
+**Step 1.** Add the JitPack repository to your build file
+
+```xml
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+```
+
+
+**Step 2**. Add the dependency
+```xml
+<dependency>
+    <groupId>com.github.esempla</groupId>
+    <artifactId>batch-name-generator</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```

@@ -1,7 +1,7 @@
-package tests;
+package com.github.esempla;
 
-import com.gihub.esempla.model.NoSuchProperty;
-import com.gihub.esempla.model.Rules;
+import com.gihub.esempla.batch.BatchNameGenerator;
+import com.gihub.esempla.batch.NoSuchPropertyExceptiopn;
 import org.junit.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -14,10 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RulesTest {
 
-
     @Test
-    public void testValidUsernameAndDate() throws Exception {
-        Rules rules = Rules.builder()
+    public void testValidUsernameAndDate() {
+        BatchNameGenerator rules = BatchNameGenerator.builder()
                 .userName("Test").userId("1")
                 .currentTime("10:10").currentDate("10/10/2018")
                 .jobId("3").build();
@@ -28,8 +27,8 @@ public class RulesTest {
     }
 
     @Test
-    public void testValidUsernameAndEmptyDate() throws Exception {
-        Rules rules = Rules.builder()
+    public void testValidUsernameAndEmptyDate() {
+        BatchNameGenerator rules = BatchNameGenerator.builder()
                 .userName("Test").userId("1")
                 .currentTime("10:10")
                 .jobId("3").build();
@@ -40,23 +39,23 @@ public class RulesTest {
         assertEquals(output, "Test-" + localDate);
     }
 
+//    @Test
+//    public void testInvalidInput()  throws NoSuchPropertyExceptiopn {
+//        BatchNameGenerator rules = BatchNameGenerator.builder()
+//                .userName("Test").userId("1")
+//                .currentTime("10:10")
+//                .jobId("3").build();
+//
+//        String input = "$PropertyName";
+//        String output = rules.parseInput(input);
+//        Executable closureContainingCodeToTest = () -> new NoSuchPropertyExceptiopn("Property not Found.");
+//        assertThrows(NoSuchPropertyExceptiopn.class, closureContainingCodeToTest, "Property not Found.");
+//
+//    }
+
     @Test
-    public void testInvalidInput() throws Exception {
-        Rules rules = Rules.builder()
-                .userName("Test").userId("1")
-                .currentTime("10:10")
-                .jobId("3").build();
-
-        String input = "$PropertyName";
-        String output = rules.parseInput(input);
-        Executable closureContainingCodeToTest = () -> new NoSuchProperty("Property not Found.");
-        assertThrows(NoSuchProperty.class, closureContainingCodeToTest, "Property not Found.");
-
-    }
-
-    @Test
-    public void testEmptyExpression() throws Exception {
-        Rules rules = new Rules();
+    public void testEmptyExpression() {
+        BatchNameGenerator rules = BatchNameGenerator.builder().build();
         String output = rules.parseInput();
         String localTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
         String localDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -64,8 +63,8 @@ public class RulesTest {
     }
 
     @Test
-    public void testTextWithVariable() throws Exception {
-        Rules rules = Rules.builder()
+    public void testTextWithVariable() {
+        BatchNameGenerator rules = BatchNameGenerator.builder()
                 .userName("Test").userId("1")
                 .currentTime("10:10")
                 .jobId("3").build();
