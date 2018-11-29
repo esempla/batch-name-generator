@@ -45,7 +45,7 @@ public class BatchNameGenerator {
         }
 
         if (expression.contains(Rule.CURRENT_DATE.getName()) && currentDate == null) {
-            expression = expression.replace(Rule.CURRENT_DATE.getName(), LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            expression = expression.replace(Rule.CURRENT_DATE.getName(), LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         } else if (expression.contains(Rule.CURRENT_DATE.getName())) {
             expression = expression.replace(Rule.CURRENT_DATE.getName(), currentDate);
