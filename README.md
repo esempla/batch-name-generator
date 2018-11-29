@@ -20,6 +20,17 @@ Default value is a concatenated between “CurrentDate”&”CurrentTime”. So 
 There is an option to combine variable with a text:
 Hello - $CurrentDate, it will result the following output "Hello - $10/10/2018"
 
+#### Sample:
+```java
+BatchNameGenerator rules = BatchNameGenerator.builder()
+        .userName("Test")
+        .userId("1")
+        .jobId("3")
+    .build();
+
+String input = "$UserName-$CurrentDate";
+String batchName = rules.parseInput(input);
+```
 #### Steps to start working with it:
 
 **Step 1.** Add the JitPack repository to your build file
