@@ -53,7 +53,7 @@ public class BatchNameGenerator {
         }
 
         if (expression.contains(Rule.CURRENT_TIME.getName()) && currentTime == null) {
-            expression = expression.replace(Rule.CURRENT_TIME.getName(), LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+            expression = expression.replace(Rule.CURRENT_TIME.getName(), LocalTime.now().format(DateTimeFormatter.ofPattern("HH-mm")));
 
         } else if (expression.contains(Rule.CURRENT_TIME.getName())) {
             expression = expression.replace(Rule.CURRENT_TIME.getName(), currentTime);
@@ -69,6 +69,6 @@ public class BatchNameGenerator {
 
     public String parseInput() {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "&"
-                + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                + LocalTime.now().format(DateTimeFormatter.ofPattern("HH-mm"));
     }
 }
